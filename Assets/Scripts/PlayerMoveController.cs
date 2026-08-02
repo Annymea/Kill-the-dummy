@@ -3,19 +3,15 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 5f;
-    
-    private Rigidbody2D rigidBody;
 
     private PlayerMovementActions playerActions;
     private SpriteRenderer spriteRenderer;
     private Vector2 movement;
-    private Vector2 aimTo;
 
 
     private void Awake()
     {
         playerActions = new PlayerMovementActions();
-        rigidBody = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
@@ -33,8 +29,6 @@ public class PlayerMovement : MonoBehaviour
     {
         //Register Player Input
         movement = playerActions.Movement.Move.ReadValue<Vector2>();
-        aimTo = playerActions.Fight.Aim.ReadValue<Vector2>();
-        Debug.Log(aimTo);
     }
 
     private void FixedUpdate()
