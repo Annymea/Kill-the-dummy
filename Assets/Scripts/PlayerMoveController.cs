@@ -1,8 +1,11 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 5f;
+
+    public Rigidbody2D body; 
 
     private PlayerMovementActions playerActions;
     private SpriteRenderer spriteRenderer;
@@ -41,7 +44,14 @@ public class PlayerMovement : MonoBehaviour
             spriteRenderer.flipX= false;
         }
         //Do the Physics
-        gameObject.transform.position = transform.position + new Vector3(movement.x * moveSpeed * Time.deltaTime, movement.y * moveSpeed * Time.deltaTime, 0);
+        //only move if there is nothing in the way
+        body.linearVelocity = new Vector2(movement.x * moveSpeed, movement.y * moveSpeed);
+        //gameObject.transform.position = transform.position + new Vector3(movement.x * moveSpeed * Time.deltaTime, movement.y * moveSpeed * Time.deltaTime, 0);
         
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("Aua");
     }
 }

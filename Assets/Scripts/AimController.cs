@@ -1,12 +1,13 @@
 using UnityEngine;
 
-public class AimController : MonoBehaviour
+public class RotateAimCircle : MonoBehaviour
 {
-    public GameObject player;
+    public Sprite notHit;
+    public Sprite hit;
+    public SpriteRenderer spriteRenderer;
     public GameObject pointer;
 
-    private SpriteRenderer spriteRenderer;
-    private Camera activeCamera;
+    private Camera cam;
 
     private PlayerMovementActions playerActions;
     private Vector3 aimPosition;
@@ -14,8 +15,7 @@ public class AimController : MonoBehaviour
     private void Awake()
     {
         playerActions = new PlayerMovementActions();
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        activeCamera = Camera.main;
+        cam = Camera.main;
     }
 
     private void OnEnable()
@@ -31,24 +31,29 @@ public class AimController : MonoBehaviour
     private void Update()
     {
         Vector2 worldPos = playerActions.Fight.Aim.ReadValue<Vector2>();
-        aimPosition = activeCamera.ScreenToWorldPoint(new Vector3(worldPos.x, worldPos.y, activeCamera.nearClipPlane));
-        aimPosition.y = aimPosition.y - spriteRenderer.size.y;
-        Debug.Log(spriteRenderer.size);
+
+        aimPosition = cam.ScreenToWorldPoint(
+            new Vector3(worldPos.x, worldPos.y, cam.nearClipPlane)
+            );
     }
 
     private void FixedUpdate()
     {
-        transform.position = aimPosition;
-
-        MoveToMouse();
-    }
-
-    private void MoveToMouse()
-    {
-        Vector2 playerPos = player.transform.position;
+        Vector2 playerPos = gameObject.transform.position;
         Vector2 direction = new Vector2(aimPosition.x - playerPos.x, aimPosition.y - playerPos.y);
 
         transform.up = direction;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        spriteRenderer.sprite = hit;
+        Debug.Log("Shoot!");
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        spriteRenderer.sprite = notHit;
     }
 
 }
