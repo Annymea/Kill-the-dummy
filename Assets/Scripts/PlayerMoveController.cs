@@ -49,9 +49,4 @@ public class PlayerMovement : MonoBehaviour
         //gameObject.transform.position = transform.position + new Vector3(movement.x * moveSpeed * Time.deltaTime, movement.y * moveSpeed * Time.deltaTime, 0);
         
     }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        Debug.Log("Aua");
-    }
 }

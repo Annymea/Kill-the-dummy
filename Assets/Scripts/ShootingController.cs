@@ -6,6 +6,12 @@ public class ShootingController : MonoBehaviour
     private float isShooting;
     public ParticleSystem fire;
 
+
+    public bool IsShooting()
+    {
+        return isShooting != 0;
+    }
+
     private void Awake()
     {
         playerActions = new PlayerMovementActions();
@@ -33,7 +39,6 @@ public class ShootingController : MonoBehaviour
             if (!fire.isPlaying)
             {
                 fire.Play();
-                Debug.Log("Start");
             }
         }
         else
@@ -41,7 +46,6 @@ public class ShootingController : MonoBehaviour
             if (fire.isPlaying)
             {
                 fire.Stop();
-                Debug.Log("Stop");
             }
         }
     }

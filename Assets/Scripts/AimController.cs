@@ -48,7 +48,6 @@ public class RotateAimCircle : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         spriteRenderer.sprite = hit;
-        Debug.Log("Shoot!");
     }
 
     private void OnTriggerExit2D(Collider2D collision)
