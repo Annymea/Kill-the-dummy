@@ -1,5 +1,7 @@
 # Test the Controls - Kill the Dummy
 
+<img width="800" height="447" alt="KillTheDummy" src="https://github.com/user-attachments/assets/2f7e20e8-cd0b-4014-9e5c-e3fc7ff8deba" />
+
 ## Status of the project
 
 Finished
